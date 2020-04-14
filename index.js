@@ -4,18 +4,13 @@ const { nanoid } = require('nanoid');
 const { response } = require('./generator');
 const { APP, HTTP } = require('./constants');
 const { timer } = require('./services');
+const { helloRouter } = require('./router');
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.status(HttpStatus.OK).json(
-    response.getResponse({
-      message: 'Hello World!',
-    }),
-  );
-});
+app.use('/getHello', helloRouter);
 
 app.post('/', async (req, res) => {
   // Get request datas
