@@ -8,11 +8,13 @@ const getHello = async (req, res) => {
   // Get request datas
   const reqId = req.header(HTTP.HEADER.X_REQUSET_ID) || nanoid();
   const reqTag = `getHello:${reqId}`;
+  const reqLabel = `${reqTag}:${nanoid(8)}`
 
-  console.time(reqTag);
+  console.time(reqLabel);
   console.log('getHello Start: ', {
     reqId,
     reqTag,
+    reqLabel,
   });
 
   // Get 10sec hello
@@ -24,8 +26,9 @@ const getHello = async (req, res) => {
   console.log('getHello End: ', {
     reqId,
     reqTag,
+    reqLabel,
   });
-  console.timeEnd(reqTag);
+  console.timeEnd(reqLabel);
 
   res.status(HttpStatus.OK).json(
     response.getResponse({
